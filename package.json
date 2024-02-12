@@ -1,6 +1,7 @@
 {
   "name": "@dword-design/mysql",
   "version": "1.0.0",
+  "repository": "dword-design/mysql",
   "funding": "https://github.com/sponsors/dword-design",
   "license": "MIT",
   "author": "Sebastian Landwehr <info@sebastianlandwehr.com>",

@@ -3,7 +3,7 @@ image:
 tasks:
   - before: >-
       echo "export
-      PUPPETEER_CACHE_DIR=/workspace/mysql2/node_modules/.cache/puppeteer" >>
+      PUPPETEER_CACHE_DIR=/workspace/mysql/node_modules/.cache/puppeteer" >>
       /home/gitpod/.bashrc
 
       gitpod-env-per-project >> /home/gitpod/.bashrc && source /home/gitpod/.bashrc
