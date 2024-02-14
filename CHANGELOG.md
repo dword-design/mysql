@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/dword-design/mysql/compare/v1.0.0...v1.0.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* use packages to convert casing ([137fa00](https://github.com/dword-design/mysql/commit/137fa006ce41395caf5aeadc2d23907547aab07c))
+
 # 1.0.0 (2024-02-12)
 
 
