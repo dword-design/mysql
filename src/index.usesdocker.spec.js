@@ -14,6 +14,18 @@ const mysqlContainerName = '97c96812-b606-4a98-aa8a-4147932c08a2'
 
 export default tester(
   {
+    'query: blob': {
+      schema: 'CREATE TABLE entities (foo BLOB NOT NULL)',
+      async test() {
+        await this.connection.query('INSERT INTO entities SET ?', [
+          { foo: 'foo' },
+        ])
+        expect(
+          (await this.connection.query('SELECT foo FROM entities'))[0]
+            .foo instanceof Buffer,
+        ).toEqual(true)
+      },
+    },
     'query: casing': {
       schema: 'CREATE TABLE entities (title_foo text NOT NULL)',
       async test() {
