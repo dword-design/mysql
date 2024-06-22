@@ -86,6 +86,15 @@ export default tester(
         ])
       },
     },
+    'query: simple parameter': {
+      schema: 'CREATE TABLE entities (foo text NOT NULL)',
+      async test() {
+        await this.connection.query('INSERT INTO entities VALUES (?)', ['foo'])
+        expect(await this.connection.query('SELECT foo FROM entities')).toEqual(
+          [{ foo: 'foo' }],
+        )
+      },
+    },
     'query: works': {
       schema: 'CREATE TABLE entities (title text NOT NULL)',
       async test() {

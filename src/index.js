@@ -15,7 +15,9 @@ export default {
     const oldQuery = result.query
     result.query = async function (...args) {
       if (args.length > 1) {
-        args[1] = snakecaseKeys(args[1], { deep: true })
+        args[1] = args[1].map(arg =>
+          typeof arg === 'object' ? snakecaseKeys(arg) : arg,
+        )
       }
       let [statementsRows, statementsColumns] = await oldQuery.call(
         this,
