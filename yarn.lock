@@ -3187,10 +3187,10 @@ camelcase-keys@^6.2.2:
     map-obj "^4.0.0"
     quick-lru "^4.0.1"
 
-camelcase-keys@^9.1.3:
-  version "9.1.3"
-  resolved "https://registry.yarnpkg.com/camelcase-keys/-/camelcase-keys-9.1.3.tgz#6367b2f9ec5724af541f58f0dcfee9b200022e5c"
-  integrity sha512-Rircqi9ch8AnZscQcsA1C47NFdaO3wukpmIRzYcDOrmvgt78hM/sj5pZhZNec2NM12uk5vTwRHZ4anGcrC4ZTg==
+"camelcase-keys@npm:@dword-design/camelcase-keys@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@dword-design/camelcase-keys/-/camelcase-keys-0.1.0.tgz#8f21466805a022a7c1d5afe15ba0bd4b49da7337"
+  integrity sha512-wLbVwiLx3Phmx6zf6NYznOfwvSTXFTn7Jjp7queLEkg8tZ4cUqwUrfMoY/vJDGMXiIBmXMUoSM2b7l0JYd/tIQ==
   dependencies:
     camelcase "^8.0.0"
     map-obj "5.0.0"
