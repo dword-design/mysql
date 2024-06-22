@@ -1,3 +1,11 @@
+## [1.0.3](https://github.com/dword-design/mysql/compare/v1.0.2...v1.0.3) (2024-06-22)
+
+
+### Bug Fixes
+
+* foo ([620fd39](https://github.com/dword-design/mysql/commit/620fd39f4c6eba1d45c2cf294d187205a4a1aa2c))
+* foo ([0919905](https://github.com/dword-design/mysql/commit/091990598358299bb92cb3d729f08b34fd7df56f))
+
 ## [1.0.2](https://github.com/dword-design/mysql/compare/v1.0.1...v1.0.2) (2024-06-22)
 
 
