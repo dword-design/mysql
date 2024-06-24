@@ -1,16 +1,16 @@
-import { endent } from '@dword-design/functions'
-import tester from '@dword-design/tester'
-import testerPluginTmpDir from '@dword-design/tester-plugin-tmp-dir'
-import { execa, execaCommand } from 'execa'
-import fs from 'fs-extra'
-import getPort from 'get-port'
-import pWaitFor from 'p-wait-for'
-import P from 'path'
-import portReady from 'port-ready'
+import { endent } from '@dword-design/functions';
+import tester from '@dword-design/tester';
+import testerPluginTmpDir from '@dword-design/tester-plugin-tmp-dir';
+import { execa, execaCommand } from 'execa';
+import fs from 'fs-extra';
+import getPort from 'get-port';
+import pWaitFor from 'p-wait-for';
+import P from 'path';
+import portReady from 'port-ready';
 
-import self from './index.js'
+import self from './index.js';
 
-const mysqlContainerName = '97c96812-b606-4a98-aa8a-4147932c08a2'
+const mysqlContainerName = '97c96812-b606-4a98-aa8a-4147932c08a2';
 
 export default tester(
   {
@@ -19,11 +19,12 @@ export default tester(
       async test() {
         await this.connection.query('INSERT INTO entities SET ?', [
           { foo: 'foo' },
-        ])
+        ]);
+
         expect(
           (await this.connection.query('SELECT foo FROM entities'))[0]
             .foo instanceof Buffer,
-        ).toEqual(true)
+        ).toEqual(true);
       },
     },
     'query: casing': {
@@ -31,10 +32,11 @@ export default tester(
       async test() {
         await this.connection.query('INSERT INTO entities SET ?', [
           { titleFoo: 'foo' },
-        ])
+        ]);
+
         expect(await this.connection.query('SELECT * FROM entities')).toEqual([
           { titleFoo: 'foo' },
-        ])
+        ]);
       },
     },
     'query: multiple statements select first': {
@@ -42,7 +44,8 @@ export default tester(
       async test() {
         await this.connection.query('INSERT INTO entities SET ?', [
           { title: 'foo' },
-        ])
+        ]);
+
         expect(
           (
             await this.connection.query(
@@ -50,7 +53,7 @@ export default tester(
               [{ title: 'bar' }],
             )
           )[1],
-        ).toEqual([{ title: 'foo' }, { title: 'bar' }])
+        ).toEqual([{ title: 'foo' }, { title: 'bar' }]);
       },
     },
     'query: multiple statements select second': {
@@ -63,16 +66,17 @@ export default tester(
               [{ title: 'foo' }],
             )
           )[1],
-        ).toEqual([{ title: 'foo' }])
+        ).toEqual([{ title: 'foo' }]);
       },
     },
     'query: multiple statements with semicolon in string': {
       schema: 'CREATE TABLE entities (title text NOT NULL)',
       async test() {
-        await this.connection.query("INSERT INTO entities VALUES (';')")
+        await this.connection.query("INSERT INTO entities VALUES (';')");
+
         expect(await this.connection.query('SELECT * FROM entities')).toEqual([
           { title: ';' },
-        ])
+        ]);
       },
     },
     'query: named placeholder': {
@@ -80,19 +84,21 @@ export default tester(
       async test() {
         await this.connection.query('INSERT INTO entities SET :entity', {
           entity: { title: 'foo' },
-        })
+        });
+
         expect(await this.connection.query('SELECT * FROM entities')).toEqual([
           { title: 'foo' },
-        ])
+        ]);
       },
     },
     'query: simple parameter': {
       schema: 'CREATE TABLE entities (foo text NOT NULL)',
       async test() {
-        await this.connection.query('INSERT INTO entities VALUES (?)', ['foo'])
+        await this.connection.query('INSERT INTO entities VALUES (?)', ['foo']);
+
         expect(await this.connection.query('SELECT foo FROM entities')).toEqual(
           [{ foo: 'foo' }],
-        )
+        );
       },
     },
     'query: works': {
@@ -100,10 +106,11 @@ export default tester(
       async test() {
         await this.connection.query('INSERT INTO entities SET ?', [
           { title: 'foo' },
-        ])
+        ]);
+
         expect(await this.connection.query('SELECT * FROM entities')).toEqual([
           { title: 'foo' },
-        ])
+        ]);
       },
     },
     'queryOne: works': {
@@ -111,10 +118,11 @@ export default tester(
       async test() {
         await this.connection.query('INSERT INTO entities SET ?', [
           { title: 'foo' },
-        ])
+        ]);
+
         expect(
           await this.connection.queryOne('SELECT * FROM entities'),
-        ).toEqual({ title: 'foo' })
+        ).toEqual({ title: 'foo' });
       },
     },
   },
@@ -122,8 +130,8 @@ export default tester(
     testerPluginTmpDir(),
     {
       async afterEach() {
-        this.connection.end()
-        await execaCommand(`docker container stop ${mysqlContainerName}`)
+        this.connection.end();
+        await execaCommand(`docker container stop ${mysqlContainerName}`);
       },
       transform: ({ schema, test }) =>
         async function () {
@@ -135,9 +143,10 @@ export default tester(
       
               ${schema}
             `,
-          )
+          );
 
-          const port = await getPort()
+          const port = await getPort();
+
           await execa('docker', [
             'run',
             '--rm',
@@ -151,8 +160,10 @@ export default tester(
             '--name',
             mysqlContainerName,
             'mysql',
-          ])
-          await portReady(port)
+          ]);
+
+          await portReady(port);
+
           // https://cweiske.de/tagebuch/docker-mysql-available.htm
           await pWaitFor(
             async () => {
@@ -164,23 +175,25 @@ export default tester(
                   'sh',
                   '-c',
                   'exec mysql --protocol TCP -e "SHOW DATABASES"',
-                ])
+                ]);
 
-                return true
+                return true;
               } catch {
-                return false
+                return false;
               }
             },
             { interval: 100 },
-          )
+          );
+
           this.connection = await self.createPool({
             charset: 'utf8mb4_general_ci',
             database: 'db',
             port,
             user: 'root',
-          })
-          await test.call(this)
+          });
+
+          await test.call(this);
         },
     },
   ],
-)
+);
