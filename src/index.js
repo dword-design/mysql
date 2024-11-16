@@ -1,4 +1,4 @@
-import { mapValues, omitBy } from '@dword-design/functions';
+import { mapValues } from '@dword-design/functions';
 import camelcaseKeys from 'camelcase-keys';
 import mysql from 'mysql2/promise';
 import snakecaseKeys from 'snakecase-keys';
@@ -44,7 +44,6 @@ export default {
           ? rows.map(row =>
               camelcaseKeys(
                 row
-                  |> omitBy(value => value === null || value === undefined)
                   |> mapValues((value, name) => {
                     const column = statementsColumns[statementIndex].find(
                       _column => _column.name === name,
