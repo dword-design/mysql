@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/dword-design/mysql/compare/v1.0.4...v2.0.0) (2024-11-16)
+
+
+### Bug Fixes
+
+* remove omits ([#15](https://github.com/dword-design/mysql/issues/15)) ([d78ad70](https://github.com/dword-design/mysql/commit/d78ad70458591443b99482db874e53236b828211))
+
+
+### BREAKING CHANGES
+
+* remove omits
+
 ## [1.0.4](https://github.com/dword-design/mysql/compare/v1.0.3...v1.0.4) (2024-11-16)
 
 
