@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/dword-design/mysql/compare/v1.0.3...v1.0.4) (2024-11-16)
+
+
+### Bug Fixes
+
+* lock file maintenance ([#14](https://github.com/dword-design/mysql/issues/14)) ([0bdc93b](https://github.com/dword-design/mysql/commit/0bdc93b0d86ed15e04e50d0e8d96d4883f59b1e6))
+
 ## [1.0.3](https://github.com/dword-design/mysql/compare/v1.0.2...v1.0.3) (2024-06-22)
 
 
